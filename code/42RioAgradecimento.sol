@@ -16,7 +16,6 @@ contract RioAgradecimento is ERC20, ERC20Permit, AccessControl {
         ERC20("42RioAgradecimento", "GRATRIO")
         ERC20Permit("42RioAgradecimento")
     {
-        // Initially grans both roles to the defaultAdmin
         _grantRole(DEFAULT_ADMIN_ROLE, defaultAdmin);
         _grantRole(MINTER_ROLE, defaultAdmin);
     }
