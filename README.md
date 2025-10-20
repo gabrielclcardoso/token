@@ -59,5 +59,17 @@ The project has a perfect use case for the multisig bonus part. The `DEFAULT_ADM
 for a multisig wallet. This wallet who will be responsible for asigning the `MINTER` will be ran by 3 accounts
 and will require the signature of 2 for it to execute any transaction.
 
-The multisig interface chosen was [https://multisig.bnbchain.org/](https://multisig.bnbchain.org/) which
+The multisig application chosen was [https://multisig.bnbchain.org/](https://multisig.bnbchain.org/) which
 integrates seamlessly with the BSC ecosystem.
+
+### Deployment
+
+#### Chosen tool
+The deployment was made within the Remix IDE and the deployment files used were stored in the `artifacts` directory.
+
+#### Chosen Explorer
+The explorer chosen for publishing was [BscScan](testnet.bscscan.com) given it is the main explorer for the BSC.
+
+The contract address is the following [0x8483F2554469BcB75100ee9233421021f2260D33](https://testnet.bscscan.com/address/0x8483F2554469BcB75100ee9233421021f2260D33).
+
+The contract was published via the remix contract verification plugin and utilizing an etherscan API key.
