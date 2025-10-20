@@ -1,7 +1,5 @@
 # 42RioAgradecimento token
 
-This is a pedagogical project that consists in developping and deploying a token on a blockchain of my choice.
-
 ## Token purpose
 
 This token will represent the gratitude of 42 students. It will be a way for students to show their gratitude 
