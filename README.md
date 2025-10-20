@@ -53,3 +53,11 @@ without paying gas.
 
 This makes it easier for the token to interact with 3rd party applications and be integrated with future student
 projects in the future eg. DAOs and DEXs.
+
+#### Bonus Multisig
+The project has a perfect use case for the multisig bonus part. The `DEFAULT_ADMIN_ROLE` is a perfect candidate
+for a multisig wallet. This wallet who will be responsible for asigning the `MINTER` will be ran by 3 accounts
+and will require the signature of 2 for it to execute any transaction.
+
+The multisig interface chosen was [https://multisig.bnbchain.org/](https://multisig.bnbchain.org/) which
+integrates seamlessly with the BSC ecosystem.
