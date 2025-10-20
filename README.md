@@ -1,47 +1,63 @@
 # 42RioAgradecimento token
 
+## Introduction
+
 This is a pedagogical project that consists in developping and deploying a token on a blockchain of my choice.
 
-## Token purpose
+It's better for you to read the `how_it_works.md` file on the documentation folder before as that file explains
+the main logic behind the token and this one justifies the choices made during project development.
 
-This token will represent the gratitude of 42 students. It will be a way for students to show their gratitude 
-towards each other in a way that is currently not possible with the resources present on the intranet.
+## Choices made
 
-## General Parameters
-* The token follows the BEP20 standard
-* The initial supply is 0
-* The token name is 42RioAgradecimento
-* The token symbol is GRATRIO
-* The smart contract has the Permit feature enabled
-* The smart contract has the AccessControl feature enabled
-* There is an `ADMIN` and a `MINTER` role
-* The `ADMIN` is responsible for delegating the `MINTER` role
-* The `MINTER` is the account with the possibility of minting tokens
-* There is a mapping on the smart contract to prevent replay attacks
+### Blockchain Choice
 
-## How the ecosystem will work
-1. The `ADMIN` grants the `MINTER` role to a wallet of his choice.
-1. The `MINTER` is able to generate transactions setting the project ID, the receiver address
-and the sender address.
-1. Transactions are checked to see if the (sender, project) entry is already flagged on the 
-smart contract mapping for replay attack prevention and if the sender and receiver 
-addresses are diferent.
-1. If the entry is already flagged or if the sender and receiver are the same, the transaction
-will fail.
-1. Otherwise, a new token is minted, sent to the receiver address and the entry is flagged
-on the mapping.
-1. The generated token can be freely transacted between the students of the school.
-1. With the Permit feature enabled future applications can be developped by the students
-on top of the token.
+For this project, the blockchain chosen to deploy the token was Binance Smart Chain (BSC). BSC was chosen
+because of it's compatibility with the Ethereum ecosystem and use of the solidity programming language,
+with the advantage of faster transaction times and lower gas fees compared to Ethereum.
 
-## Possible application
-The 42 campus who wishes to implement this token can run a web application on it's on premisse
-server, the `MINTER` credentials will be stored on the backend of this application. The `ADMIN`
-wallet will be in custody of the campus staff.
+Given the project will need to store a mapping on chain, the ethereum mainnet gas fees would become to high
+for the project to be functional.
 
-The front-end of the application will let the user login with his intra user and his wallet
-address. It will then validate the completion of the project and allow the student to
-choose the project and the person to whom he wants to give the token.
+### Developer Tools Choices
 
-This information will be sent to the back-end where the `MINTER` will try to execute the
-transaction and return the status of execution to the user on the front-end.
+#### IDE
+
+The IDE chosen was Remix. It was chosen for it's simplicity and ease of use aswell as it's simple integration
+with github. It seemed like the perfect candidate for an introductory blockchain project.
+
+#### Wallet
+
+The wallet chosen to interact with the project was MetaMask. I was already familiar with the wallet and because
+of it's wide adoption it would be easier to integrate with other apps if necessary.
+
+### Development Choices
+
+#### Libraries
+For this project it was chosen to use OpenZeppelin's contract libraries. OpenZeppelin is a well established
+project on the web3 space and it's contract libraries are used in a wide range of projects on chain. Given it
+is a battle tested library that gives you a template for easily developping ERC20 compliant tokens it was an
+easy choice.
+
+#### OpenZeppelin's AccessControl Feature
+The AccessControl feature of OpenZeppelin lets you Restrict who can access the functions of a contract or
+when they can do it, this is done via roles.
+
+On the project there are 2 main roles defined that the AccessControl feature helps implement. The `MINTER` role
+and an admin which is created as the `DEFAULT_ADMIN_ROLE`. With these two roles defined we can make it so only
+the address with the `MINTER` role can mint new coins and only the address with the `DEFAULT_ADMIN_ROLE` can
+grant and revoke the `MINTER` role.
+
+#### OpenZeppelin's Permit Feature
+The permit feature makes it so token holders are able to allow third parties to transfer from their account
+without paying gas.
+
+This makes it easier for the token to interact with 3rd party applications and be integrated with future student
+projects in the future eg. DAOs and DEXs.
+
+#### Bonus Multisig
+The project has a perfect use case for the multisig bonus part. The `DEFAULT_ADMIN_ROLE` is a perfect candidate
+for a multisig wallet. This wallet who will be responsible for asigning the `MINTER` will be ran by 3 accounts
+and will require the signature of 2 for it to execute any transaction.
+
+The multisig interface chosen was [https://multisig.bnbchain.org/](https://multisig.bnbchain.org/) which
+integrates seamlessly with the BSC ecosystem.
